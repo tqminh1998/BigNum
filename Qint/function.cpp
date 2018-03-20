@@ -188,20 +188,3 @@ string readLine(string line){
 			}
 		}
 }
-
-//int main(){
-//	string Dec = "1234567789101112131415";
-//	string Bin = DecToBin(Dec);
-//	cout << Bin << endl;
-//	string Dec2 = BinToDec(Bin);
-//	cout << Dec2 << endl;
-//	string hex = BinToHex(Bin);
-//	cout << hex << endl;
-//	string bin2 = HexToBin(hex);
-//	cout << bin2 << endl;
-//	string Hex = DecToHex(Dec);
-//	cout << Hex << endl;
-//	string Dec2 = HexToDec(Hex);
-//	cout << Dec2 << endl;
-//	return 0;
-//}
