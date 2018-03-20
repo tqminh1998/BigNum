@@ -11,6 +11,6 @@ string BinToHex(string& Bin);
 string DecToHex(string& Dec);
 string HexToDec(string& Hex);
 //doc input
-vector<string> spitLine(string line);
+vector<string> splitLine(string line);
 //doc line tra ve ket qua
 string readLine(string line);
