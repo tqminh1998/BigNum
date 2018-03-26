@@ -1,4 +1,4 @@
-#ifndef QINT_H
+﻿#ifndef QINT_H
 #define QINT_H
 #include <iostream>
 #include <vector>
@@ -16,15 +16,21 @@ public:
 	Qint(int, int, int, int);
 	//~Qint();
 	Qint& operator =(const Qint& b);
+	//Constructor với đối số là dãy bit
 	Qint(string binArr);
+	//trả về chuỗi bit của số Qint
 	string binArr();
-
+	//toán tử and
 	Qint operator & (const Qint& b);
+	//toán tử or
 	Qint operator | (const Qint& b);
+	//toán tử not
 	friend Qint operator ~ (const Qint& b);//1 ngoi
-	friend Qint operator - (const Qint& b); // 1 ngoi
+	//toán tử lấy số đối (1 ngôi)
+	friend Qint operator - ( Qint b); // 1 ngoi
 	Qint operator ^ (const Qint& b);
 
+	//toán tử +,-,*,/ 2 số Qint
 	Qint operator + (Qint& b);
 	Qint operator - (const Qint& b);
 	Qint operator * (/*const*/ Qint& M);
@@ -41,6 +47,9 @@ public:
 	//nhap & convert
 	void scan(string str, int base);
 	string print(int base);
+
+	//lấy trị tuyệt đối Qint
+	Qint abs(Qint a);
 };
 
 #endif

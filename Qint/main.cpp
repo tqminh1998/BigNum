@@ -18,8 +18,5 @@ int main(int argc,char* argv[]){
 	}
 	fi.close();
 	fo.close();
-	
-
-
 	return 0;
 }

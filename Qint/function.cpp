@@ -1,6 +1,7 @@
-#include "function.h"
+﻿#include "function.h"
 #include "Qint.h"
 
+//chuỗi = chuỗi chia 2
 string strDiv2(string str){
 	string res = "";
 	int i = 0;
@@ -21,16 +22,27 @@ string strDiv2(string str){
 	return res.substr(l);
 }
 
-string DecToBin(string& Dec){
+//Chuyển thập phân sang dãy bit nhị phân
+string DecToBin(string Dec){
 	string res = "";
+	int minus = 0;
+	if (Dec[0] == '-') {
+		Dec.erase(Dec.begin());
+		minus = 1;
+	}
 	while (Dec != "0"){
 		int bit = (Dec[Dec.length() - 1] - 48) % 2;
 		res.insert(res.begin(), bit + '0');
 		Dec = strDiv2(Dec);
 	}
+	if (minus){
+		Qint temp(res);
+		temp = -temp;
+		res = temp.binArr();
+	}
 	return res;
 }
-
+//chuỗi nhân 2 trả về chuỗi
 string strx2(string str){
 	int nho = 0;
 	string res = "";
@@ -45,6 +57,8 @@ string strx2(string str){
 	if (nho) res.insert(res.begin(), nho + '0');
 	return res;
 }
+
+//chuỗi * 2^n, return chuỗi
 string _2Expn(int n){
 	string str="1";
 	for (int i = 0; i < n; i++){
@@ -53,11 +67,14 @@ string _2Expn(int n){
 	return str;
 }
 
+//chèn bit 0 vào đầu
 void chen0(string &a, int n){
 	while (n--){
 		a.insert(a.begin(), '0');
 	}
 }
+
+//cộng 2 chuỗi, trả về chuỗi
 string strPlusStr(string a, string b){
 	int lenA = a.length();
 	int lenB = b.length();
@@ -78,11 +95,21 @@ string strPlusStr(string a, string b){
 	if (nho) res.insert(res.begin(), nho + '0');
 	return res;
 }
-string BinToDec(string& Bin){
+//Chuyển từ chuỗi nhị phân sang số thập phân
+string BinToDec(string Bin){
+	int minus = 0;
+	if (Bin.length() == 128 && Bin[0] == '1') minus = 1;
+	if (minus){
+		Qint temp(Bin);
+		Qint one(0, 0, 0, 1);
+		temp = temp - one;
+		temp = ~temp;
+		Bin = temp.binArr();
+	}
 	int i = 127;
 	string res = "";
 	int j = Bin.length()-1;
-	while (i >= 0 && j>=0){
+	while (i > 0 && j>=0){
 		int bit = Bin[j] - '0';
 		if (bit){
 			string mu2 = _2Expn(127 - i);
@@ -91,10 +118,12 @@ string BinToDec(string& Bin){
 		i--;
 		j--;
 	}
+	if (minus) res.insert(res.begin(), '-');
 	return res;
 }
 
-string BinToHex(string& bin){
+//Chuyển dãy bit nhị phân sang cơ số 16
+string BinToHex(string bin){
 	int len = bin.length();
 	if (len % 4 != 0){
 		for (int k = 0; k < (4 - len % 4); k++)
@@ -115,7 +144,8 @@ string BinToHex(string& bin){
 	return res;
 }
 
-string HexToBin(string& Hex){
+//chuyển cơ số 16 sang dãy bit nhị phân
+string HexToBin(string Hex){
 	int i = Hex.length()-1;
 	string res = "";
 	while (i >= 0){
@@ -132,13 +162,16 @@ string HexToBin(string& Hex){
 	return res;
 }
 
-string DecToHex(string& Dec){
+//chuyển base: 10->16
+string DecToHex(string Dec){
 	return BinToHex(DecToBin(Dec));
 }
-string HexToDec(string& Hex){
+//chuyển base: 16->10
+string HexToDec(string Hex){
 	return BinToDec(HexToBin(Hex));
 }
 
+//tách dòng lệnh
 vector<string> splitLine(string line){
 	vector<string> res;
 	char* s = strdup(line.c_str());
@@ -149,7 +182,7 @@ vector<string> splitLine(string line){
 	}
 	return res;
 }
-
+//Đọc từng dòng theo format file input.txt
 string readLine(string line){
 	vector<string> phan = splitLine(line);
 	switch (phan.size()){
