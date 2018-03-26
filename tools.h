@@ -5,6 +5,7 @@
 #include <stack>
 #include <vector>
 #include <sstream>
+#include <cmath>
 using namespace std;
 
 // split floating number
@@ -30,3 +31,17 @@ int countExponent(vector<int> bitPart1, vector<int> bitPart2);
 
 // convert bias
 vector< int> cvBias(int a);
+
+//xác định xem 1 đoạn bit cụ thể có tất cả các bit giống nhay hay ko
+bool isAllBit(vector <int> bit, int val, int s, int e);
+
+// phân loại số chấm động
+// 0: số zero
+// 1: dạng chuẩn 
+// 2: dạng không chuẩn
+// 3: Inf
+// 4: Số báo lỗi
+int Classification(vector<int> bit);
+
+// chuyển từ bit sang số (bias)
+int cvBiasToNum(vector<int> exp_bit);
